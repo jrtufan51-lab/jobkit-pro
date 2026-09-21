@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JobKit Pro</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Arial,sans-serif;
+  background:#f3f6fb;
+  color:#172033;
+}
+header{
+  background:linear-gradient(135deg,#111827,#2563eb);
+  color:white;
+  text-align:center;
+  padding:25px 15px;
+}
+header h1{font-size:30px}
+header p{margin-top:7px;opacity:.9}
+.badge{
+  display:inline-block;
+  margin-top:12px;
+  padding:7px 14px;
+  border-radius:20px;
+  background:#ffffff22;
+}
+.container{
+  max-width:1100px;
+  margin:25px auto;
+  padding:0 15px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+.card{
+  background:white;
+  padding:20px;
+  border-radius:18px;
+  box-shadow:0 8px 25px #00000012;
+  margin-bottom:20px;
+}
+.card h2{margin-bottom:15px}
+label{
+  display:block;
+  font-weight:bold;
+  margin:12px 0 6px;
+}
+input,textarea,select{
+  width:100%;
+  padding:12px;
+  border:1px solid #d5dbe5;
+  border-radius:10px;
+  font-size:15px;
+}
+textarea{
+  min-height:90px;
+  resize:vertical;
+}
+button{
+  border:0;
+  padding:12px 16px;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
+  margin:5px 3px 0 0;
+}
+.blue{background:#2563eb;color:white}
+.green{background:#16a34a;color:white}
+.dark{background:#111827;color:white}
+.red{background:#dc2626;color:white}
+.gold{background:#f59e0b;color:white}
+
+.template-buttons{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.template-buttons button{background:#e5e7eb}
+.template-buttons button.active{
+  background:#2563eb;
+  color:white;
+}
+
+.preview{
+  background:white;
+  min-height:700px;
+  padding:35px;
+  border-top:6px solid #2563eb;
+}
+.cv-name{
+  font-size:30px;
+  font-weight:bold;
+  color:#2563eb;
+}
+.cv-title{
+  margin-top:5px;
+  font-size:17px;
+  color:#555;
+}
+.contact{
+  margin-top:12px;
+  color:#555;
+  line-height:1.7;
+  font-size:14px;
+}
+.cv-section{margin-top:25px}
+.cv-section h3{
+  color:#2563eb;
+  border-bottom:2px solid #2563eb;
+  padding-bottom:6px;
+  margin-bottom:10px;
+}
+.cv-section p{
+  line-height:1.7;
+  white-space:pre-line;
+}
+.skills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+}
+.skill{
+  background:#e8f0ff;
+  color:#1d4ed8;
+  padding:6px 10px;
+  border-radius:15px;
+  font-size:13px;
+}
+.cover,.message{
+  padding:15px;
+  border-radius:10px;
+  white-space:pre-line;
+  line-height:1.7;
+}
+.cover{background:#f8fafc}
+.message{
+  background:#ecfdf5;
+  border-left:4px solid #16a34a;
+}
+.premium{
+  background:linear-gradient(135deg,#111827,#312e81);
+  color:white;
+  padding:25px;
+  border-radius:18px;
+}
+.premium h2{color:#fbbf24}
+.price{
+  font-size:32px;
+  font-weight:bold;
+  margin:10px 0;
+}
+.premium li{margin:8px 0}
+footer{
+  text-align:center;
+  padding:30px;
+  color:#777;
+}
+body.dark{
+  background:#0f172a;
+  color:#e5e7eb;
+}
+body.dark .card,
+body.dark .preview{
+  background:#1e293b;
+}
+body.dark input,
+body.dark textarea,
+body.dark select{
+  background:#0f172a;
+  color:white;
+  border-color:#475569;
+}
+@media(max-width:800px){
+  .grid{grid-template-columns:1fr}
+  .preview{padding:22px}
+}
+@media print{
+  body *{visibility:hidden}
+  #cvPreview,#cvPreview *{visibility:visible}
+  #cvPreview{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    box-shadow:none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>💼 JobKit Pro</h1>
+  <p>CV • Cover Letter • Job Application Message</p>
+  <span class="badge">🚀 Create your job application in minutes</span>
+</header>
+
+<div class="container">
+
+<div class="grid">
+
+<div>
+
+<div class="card">
+<h2>👤 Personal Details</h2>
+
+<label>Full Name</label>
+<input id="name" placeholder="Example: Rahul Kumar">
+
+<label>Job Title</label>
+<input id="job" placeholder="Example: Accountant">
+
+<label>Phone</label>
+<input id="phone" placeholder="+91 XXXXX XXXXX">
+
+<label>Email</label>
+<input id="email" placeholder="your@email.com">
+
+<label>Location</label>
+<input id="location" placeholder="Hyderabad, Telangana">
+
+<label>Career Objective</label>
+<textarea id="objective" placeholder="Write your career objective"></textarea>
+</div>
+
+<div class="card">
+<h2>🎓 Education & Skills</h2>
+
+<label>Education</label>
+<input id="education" placeholder="Example: B.Com">
+
+<label>Skills</label>
+<input id="skills" placeholder="Excel, Tally, Communication">
+
+<label>Experience</label>
+<textarea id="experience" placeholder="Fresher / Your experience"></textarea>
+</div>
+
+<div class="card">
+<h2>🎨 CV Template</h2>
+
+<div class="template-buttons">
+<button id="t1" class="active" onclick="template(1)">Classic</button>
+<button id="t2" onclick="template(2)">Modern</button>
+<button id="t3" onclick="template(3)">Simple</button>
+</div>
+</div>
+
+<div class="card">
+<h2>📝 Job Details</h2>
+
+<label>Company Name</label>
+<input id="company" placeholder="Example: ABC Company">
+
+<label>Position</label>
+<input id="position" placeholder="Example: Accountant">
+
+<button class="blue" onclick="generateAll()">🔄 Generate Application</button>
+</div>
+
+<div class="card">
+<h2>⚙️ Actions</h2>
+
+<button class="green" onclick="saveData()">💾 Save</button>
+<button class="blue" onclick="generateAll()">Update Preview</button>
+<button class="dark" onclick="window.print()">🖨️ Save CV as PDF</button>
+<button class="red" onclick="clearAll()">🗑️ Clear</button>
+<button class="dark" onclick="toggleDark()">🌙 Dark Mode</button>
+</div>
+
+<div class="premium">
+
+<h2>🚀 Professional CV Service</h2>
+
+<p style="margin-top:8px">
+Get a polished, job-ready CV prepared for you.
+</p>
+
+<div class="price">₹99</div>
+
+<ul>
+<li>✅ Professional CV design</li>
+<li>✅ Job-ready formatting</li>
+<li>✅ ATS-friendly structure</li>
+<li>✅ Personalised CV</li>
+<li>✅ PDF delivery</li>
+</ul>
+
+<br>
+
+<button class="gold" onclick="payNow()">💳 Pay ₹99 with UPI</button>
+
+<button class="green" onclick="whatsapp()">
+📲 Order Professional CV on WhatsApp
+</button>
+
+<p style="margin-top:12px;font-size:13px">
+After payment, send your details and payment confirmation on WhatsApp.
+</p>
+
+</div>
+
+</div>
+
+<div>
+
+<div class="card">
+<h2>👀 Live CV Preview</h2>
+
+<div id="cvPreview" class="preview">
+
+<div class="cv-name" id="pName">Your Name</div>
+<div class="cv-title" id="pJob">Your Job Title</div>
+
+<div class="contact" id="pContact">
+Phone | Email | Location
+</div>
+
+<div class="cv-section">
+<h3>PROFILE</h3>
+<p id="pObjective">Your career objective will appear here.</p>
+</div>
+
+<div class="cv-section">
+<h3>EDUCATION</h3>
+<p id="pEducation">Your education will appear here.</p>
+</div>
+
+<div class="cv-section">
+<h3>SKILLS</h3>
+<div id="pSkills" class="skills"></div>
+</div>
+
+<div class="cv-section">
+<h3>EXPERIENCE</h3>
+<p id="pExperience">Your experience will appear here.</p>
+</div>
+
+<div class="cv-section">
+<h3>COVER LETTER</h3>
+<div class="cover" id="pCover">Your cover letter will appear here.</div>
+</div>
+
+<div class="cv-section">
+<h3>JOB APPLICATION MESSAGE</h3>
+<div class="message" id="pMessage">Your application message will appear here.</div>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+
+<footer>
+© 2026 JobKit Pro • Built for job seekers
+</footer>
+
+<script>
+
+const fields=[
+"name","job","phone","email","location",
+"objective","education","skills","experience",
+"company","position"
+];
+
+fields.forEach(id=>{
+  document.getElementById(id).addEventListener("input",generateAll);
+});
+
+function generateAll(){
+
+const name=document.getElementById("name").value || "Your Name";
+const job=document.getElementById("job").value || "Your Job Title";
+const phone=document.getElementById("phone").value || "Phone";
+const email=document.getElementById("email").value || "Email";
+const location=document.getElementById("location").value || "Location";
+
+const objective=document.getElementById("objective").value ||
+"Motivated professional looking for an opportunity to learn, grow and contribute to a professional organization.";
+
+const education=document.getElementById("education").value ||
+"Your Education";
+
+const skills=document.getElementById("skills").value ||
+"Communication, Computer Skills";
+
+const experience=document.getElementById("experience").value ||
+"Fresher";
+
+const company=document.getElementById("company").value ||
+"the company";
+
+const position=document.getElementById("position").value ||
+job;
+
+document.getElementById("pName").textContent=name;
+document.getElementById("pJob").textContent=job;
+
+document.getElementById("pContact").textContent=
+phone+" | "+email+" | "+location;
+
+document.getElementById("pObjective").textContent=objective;
+document.getElementById("pEducation").textContent=education;
+document.getElementById("pExperience").textContent=experience;
+
+const skillBox=document.getElementById("pSkills");
+skillBox.innerHTML="";
+
+skills.split(",").forEach(skill=>{
+  if(skill.trim()){
+    const span=document.createElement("span");
+    span.className="skill";
+    span.textContent=skill.trim();
+    skillBox.appendChild(span);
+  }
+});
+
+const cover=
+"Dear Hiring Manager,\n\n"+
+"I am writing to apply for the position of "+position+
+" at "+company+". I am interested in this opportunity and believe my skills and educational background can help me contribute to your organization.\n\n"+
+"I would appreciate the opportunity to discuss my application with you. Thank you for considering my application.\n\n"+
+"Sincerely,\n"+name;
+
+document.getElementById("pCover").textContent=cover;
+
+const message=
+"Hello Sir/Madam,\n\n"+
+"My name is "+name+". I am interested in the "+position+
+" position at "+company+".\n\n"+
+"Education: "+education+
+"\nSkills: "+skills+
+"\nLocation: "+location+
+"\n\nI have attached my CV for your consideration. Please let me know if there is an opportunity to attend an interview.\n\nThank you.";
+
+document.getElementById("pMessage").textContent=message;
+
+}
+
+function saveData(){
+
+let data={};
+
+fields.forEach(id=>{
+  data[id]=document.getElementById(id).value;
+});
+
+localStorage.setItem("jobkitData",JSON.stringify(data));
+
+alert("✅ Your information has been saved!");
+
+}
+
+function loadData(){
+
+const saved=localStorage.getItem("jobkitData");
+
+if(!saved)return;
+
+const data=JSON.parse(saved);
+
+fields.forEach(id=>{
+  if(data[id]!==undefined){
+    document.getElementById(id).value=data[id];
+  }
+});
+
+generateAll();
+
+}
+
+function clearAll(){
+
+if(!confirm("Delete all information?"))return;
+
+fields.forEach(id=>{
+  document.getElementById(id).value="";
+});
+
+localStorage.removeItem("jobkitData");
+
+generateAll();
+
+}
+
+function template(number){
+
+const preview=document.getElementById("cvPreview");
+
+document.querySelectorAll(".template-buttons button")
+.forEach(btn=>btn.classList.remove("active"));
+
+document.getElementById("t"+number).classList.add("active");
+
+if(number===1){
+  preview.style.borderTop="6px solid #2563eb";
+  preview.style.borderLeft="0";
+  preview.style.fontFamily="Arial";
+}
+
+if(number===2){
+  preview.style.borderTop="0";
+  preview.style.borderLeft="7px solid #7c3aed";
+  preview.style.fontFamily="Georgia";
+}
+
+if(number===3){
+  preview.style.borderTop="0";
+  preview.style.borderLeft="0";
+  preview.style.fontFamily="Verdana";
+}
+
+}
+
+function toggleDark(){
+  document.body.classList.toggle("dark");
+}
+
+function payNow(){
+
+const upi=
+"upi://pay?pa=8798834068@ybl&pn=JobKit%20Pro&am=99&cu=INR";
+
+window.location.href=upi;
+
+}
+
+function whatsapp(){
+
+const name=document.getElementById("name").value || "Not provided";
+const job=document.getElementById("job").value || "Not provided";
+const phone=document.getElementById("phone").value || "Not provided";
+const email=document.getElementById("email").value || "Not provided";
+const location=document.getElementById("location").value || "Not provided";
+const education=document.getElementById("education").value || "Not provided";
+const skills=document.getElementById("skills").value || "Not provided";
+const experience=document.getElementById("experience").value || "Not provided";
+const company=document.getElementById("company").value || "Not provided";
+const position=document.getElementById("position").value || job;
+
+const message=
+`Hello, I want a Professional Job Application Kit for ₹99.
+
+👤 Name: ${name}
+💼 Job: ${job}
+📱 Phone: ${phone}
+📧 Email: ${email}
+📍 Location: ${location}
+
+🎓 Education: ${education}
+🛠️ Skills: ${skills}
+💼 Experience: ${experience}
+
+🏢 Company: ${company}
+🎯 Position: ${position}
+
+I have made the ₹99 payment.
+Please prepare my Professional CV and Job Application Kit.`;
+
+const url=
+"https://wa.me/918247085657?text="+
+encodeURIComponent(message);
+
+window.open(url,"_blank");
+
+}
+
+loadData();
+generateAll();
+
+</script>
+
+</body>
+</html>
