@@ -1,0 +1,9 @@
+{
+  "name": "JobKit Pro",
+  "short_name": "JobKit Pro",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f3f6fb",
+  "theme_color": "#2563eb",
+  "description": "Create CV, cover letter and job application messages."
+}
