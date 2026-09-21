@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>JobKit Pro</title>
-  <title>JobKit Pro</title>
+
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#2563eb">
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
+
 body{
   font-family:Arial,sans-serif;
   background:#f3f6fb;
   color:#172033;
 }
+
 header{
   background:linear-gradient(135deg,#111827,#2563eb);
   color:white;
   text-align:center;
   padding:25px 15px;
 }
+
 header h1{font-size:30px}
 header p{margin-top:7px;opacity:.9}
+
 .badge{
   display:inline-block;
   margin-top:12px;
@@ -29,16 +35,19 @@ header p{margin-top:7px;opacity:.9}
   border-radius:20px;
   background:#ffffff22;
 }
+
 .container{
   max-width:1100px;
   margin:25px auto;
   padding:0 15px;
 }
+
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:20px;
 }
+
 .card{
   background:white;
   padding:20px;
@@ -46,12 +55,15 @@ header p{margin-top:7px;opacity:.9}
   box-shadow:0 8px 25px #00000012;
   margin-bottom:20px;
 }
+
 .card h2{margin-bottom:15px}
+
 label{
   display:block;
   font-weight:bold;
   margin:12px 0 6px;
 }
+
 input,textarea,select{
   width:100%;
   padding:12px;
@@ -59,10 +71,12 @@ input,textarea,select{
   border-radius:10px;
   font-size:15px;
 }
+
 textarea{
   min-height:90px;
   resize:vertical;
 }
+
 button{
   border:0;
   padding:12px 16px;
@@ -71,6 +85,7 @@ button{
   cursor:pointer;
   margin:5px 3px 0 0;
 }
+
 .blue{background:#2563eb;color:white}
 .green{background:#16a34a;color:white}
 .dark{background:#111827;color:white}
@@ -82,7 +97,11 @@ button{
   gap:8px;
   flex-wrap:wrap;
 }
-.template-buttons button{background:#e5e7eb}
+
+.template-buttons button{
+  background:#e5e7eb;
+}
+
 .template-buttons button.active{
   background:#2563eb;
   color:white;
@@ -94,38 +113,48 @@ button{
   padding:35px;
   border-top:6px solid #2563eb;
 }
+
 .cv-name{
   font-size:30px;
   font-weight:bold;
   color:#2563eb;
 }
+
 .cv-title{
   margin-top:5px;
   font-size:17px;
   color:#555;
 }
+
 .contact{
   margin-top:12px;
   color:#555;
   line-height:1.7;
   font-size:14px;
 }
-.cv-section{margin-top:25px}
+
+.cv-section{
+  margin-top:25px;
+}
+
 .cv-section h3{
   color:#2563eb;
   border-bottom:2px solid #2563eb;
   padding-bottom:6px;
   margin-bottom:10px;
 }
+
 .cv-section p{
   line-height:1.7;
   white-space:pre-line;
 }
+
 .skills{
   display:flex;
   flex-wrap:wrap;
   gap:7px;
 }
+
 .skill{
   background:#e8f0ff;
   color:#1d4ed8;
@@ -133,43 +162,61 @@ button{
   border-radius:15px;
   font-size:13px;
 }
-.cover,.message{
+
+.cover,
+.message{
   padding:15px;
   border-radius:10px;
   white-space:pre-line;
   line-height:1.7;
 }
-.cover{background:#f8fafc}
+
+.cover{
+  background:#f8fafc;
+}
+
 .message{
   background:#ecfdf5;
   border-left:4px solid #16a34a;
 }
+
 .premium{
   background:linear-gradient(135deg,#111827,#312e81);
   color:white;
   padding:25px;
   border-radius:18px;
 }
-.premium h2{color:#fbbf24}
+
+.premium h2{
+  color:#fbbf24;
+}
+
 .price{
   font-size:32px;
   font-weight:bold;
   margin:10px 0;
 }
-.premium li{margin:8px 0}
+
+.premium li{
+  margin:8px 0;
+}
+
 footer{
   text-align:center;
   padding:30px;
   color:#777;
 }
+
 body.dark{
   background:#0f172a;
   color:#e5e7eb;
 }
+
 body.dark .card,
 body.dark .preview{
   background:#1e293b;
 }
+
 body.dark input,
 body.dark textarea,
 body.dark select{
@@ -177,13 +224,27 @@ body.dark select{
   color:white;
   border-color:#475569;
 }
+
 @media(max-width:800px){
-  .grid{grid-template-columns:1fr}
-  .preview{padding:22px}
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .preview{
+    padding:22px;
+  }
 }
+
 @media print{
-  body *{visibility:hidden}
-  #cvPreview,#cvPreview *{visibility:visible}
+  body *{
+    visibility:hidden;
+  }
+
+  #cvPreview,
+  #cvPreview *{
+    visibility:visible;
+  }
+
   #cvPreview{
     position:absolute;
     left:0;
@@ -229,6 +290,7 @@ body.dark select{
 
 <label>Career Objective</label>
 <textarea id="objective" placeholder="Write your career objective"></textarea>
+
 </div>
 
 <div class="card">
@@ -242,6 +304,7 @@ body.dark select{
 
 <label>Experience</label>
 <textarea id="experience" placeholder="Fresher / Your experience"></textarea>
+
 </div>
 
 <div class="card">
@@ -252,6 +315,7 @@ body.dark select{
 <button id="t2" onclick="template(2)">Modern</button>
 <button id="t3" onclick="template(3)">Simple</button>
 </div>
+
 </div>
 
 <div class="card">
@@ -263,17 +327,33 @@ body.dark select{
 <label>Position</label>
 <input id="position" placeholder="Example: Accountant">
 
-<button class="blue" onclick="generateAll()">🔄 Generate Application</button>
+<button class="blue" onclick="generateAll()">
+🔄 Generate Application
+</button>
+
 </div>
 
 <div class="card">
 <h2>⚙️ Actions</h2>
 
 <button class="green" onclick="saveData()">💾 Save</button>
-<button class="blue" onclick="generateAll()">Update Preview</button>
-<button class="dark" onclick="window.print()">🖨️ Save CV as PDF</button>
-<button class="red" onclick="clearAll()">🗑️ Clear</button>
-<button class="dark" onclick="toggleDark()">🌙 Dark Mode</button>
+
+<button class="blue" onclick="generateAll()">
+Update Preview
+</button>
+
+<button class="dark" onclick="window.print()">
+🖨️ Save CV as PDF
+</button>
+
+<button class="red" onclick="clearAll()">
+🗑️ Clear
+</button>
+
+<button class="dark" onclick="toggleDark()">
+🌙 Dark Mode
+</button>
+
 </div>
 
 <div class="premium">
@@ -296,7 +376,9 @@ Get a polished, job-ready CV prepared for you.
 
 <br>
 
-<button class="gold" onclick="payNow()">💳 Pay ₹99 with UPI</button>
+<button class="gold" onclick="payNow()">
+💳 Pay ₹99 with UPI
+</button>
 
 <button class="green" onclick="whatsapp()">
 📲 Order Professional CV on WhatsApp
@@ -313,12 +395,18 @@ After payment, send your details and payment confirmation on WhatsApp.
 <div>
 
 <div class="card">
+
 <h2>👀 Live CV Preview</h2>
 
 <div id="cvPreview" class="preview">
 
-<div class="cv-name" id="pName">Your Name</div>
-<div class="cv-title" id="pJob">Your Job Title</div>
+<div class="cv-name" id="pName">
+Your Name
+</div>
+
+<div class="cv-title" id="pJob">
+Your Job Title
+</div>
 
 <div class="contact" id="pContact">
 Phone | Email | Location
@@ -326,12 +414,16 @@ Phone | Email | Location
 
 <div class="cv-section">
 <h3>PROFILE</h3>
-<p id="pObjective">Your career objective will appear here.</p>
+<p id="pObjective">
+Your career objective will appear here.
+</p>
 </div>
 
 <div class="cv-section">
 <h3>EDUCATION</h3>
-<p id="pEducation">Your education will appear here.</p>
+<p id="pEducation">
+Your education will appear here.
+</p>
 </div>
 
 <div class="cv-section">
@@ -341,17 +433,23 @@ Phone | Email | Location
 
 <div class="cv-section">
 <h3>EXPERIENCE</h3>
-<p id="pExperience">Your experience will appear here.</p>
+<p id="pExperience">
+Your experience will appear here.
+</p>
 </div>
 
 <div class="cv-section">
 <h3>COVER LETTER</h3>
-<div class="cover" id="pCover">Your cover letter will appear here.</div>
+<div class="cover" id="pCover">
+Your cover letter will appear here.
+</div>
 </div>
 
 <div class="cv-section">
 <h3>JOB APPLICATION MESSAGE</h3>
-<div class="message" id="pMessage">Your application message will appear here.</div>
+<div class="message" id="pMessage">
+Your application message will appear here.
+</div>
 </div>
 
 </div>
@@ -369,9 +467,17 @@ Phone | Email | Location
 <script>
 
 const fields=[
-"name","job","phone","email","location",
-"objective","education","skills","experience",
-"company","position"
+"name",
+"job",
+"phone",
+"email",
+"location",
+"objective",
+"education",
+"skills",
+"experience",
+"company",
+"position"
 ];
 
 fields.forEach(id=>{
@@ -381,9 +487,13 @@ fields.forEach(id=>{
 function generateAll(){
 
 const name=document.getElementById("name").value || "Your Name";
+
 const job=document.getElementById("job").value || "Your Job Title";
+
 const phone=document.getElementById("phone").value || "Phone";
+
 const email=document.getElementById("email").value || "Email";
+
 const location=document.getElementById("location").value || "Location";
 
 const objective=document.getElementById("objective").value ||
@@ -405,25 +515,36 @@ const position=document.getElementById("position").value ||
 job;
 
 document.getElementById("pName").textContent=name;
+
 document.getElementById("pJob").textContent=job;
 
 document.getElementById("pContact").textContent=
 phone+" | "+email+" | "+location;
 
 document.getElementById("pObjective").textContent=objective;
+
 document.getElementById("pEducation").textContent=education;
+
 document.getElementById("pExperience").textContent=experience;
 
 const skillBox=document.getElementById("pSkills");
+
 skillBox.innerHTML="";
 
 skills.split(",").forEach(skill=>{
+
   if(skill.trim()){
+
     const span=document.createElement("span");
+
     span.className="skill";
+
     span.textContent=skill.trim();
+
     skillBox.appendChild(span);
+
   }
+
 });
 
 const cover=
@@ -456,7 +577,10 @@ fields.forEach(id=>{
   data[id]=document.getElementById(id).value;
 });
 
-localStorage.setItem("jobkitData",JSON.stringify(data));
+localStorage.setItem(
+"jobkitData",
+JSON.stringify(data)
+);
 
 alert("✅ Your information has been saved!");
 
@@ -471,9 +595,13 @@ if(!saved)return;
 const data=JSON.parse(saved);
 
 fields.forEach(id=>{
+
   if(data[id]!==undefined){
+
     document.getElementById(id).value=data[id];
+
   }
+
 });
 
 generateAll();
@@ -501,30 +629,39 @@ const preview=document.getElementById("cvPreview");
 document.querySelectorAll(".template-buttons button")
 .forEach(btn=>btn.classList.remove("active"));
 
-document.getElementById("t"+number).classList.add("active");
+document.getElementById("t"+number)
+.classList.add("active");
 
 if(number===1){
+
   preview.style.borderTop="6px solid #2563eb";
   preview.style.borderLeft="0";
   preview.style.fontFamily="Arial";
+
 }
 
 if(number===2){
+
   preview.style.borderTop="0";
   preview.style.borderLeft="7px solid #7c3aed";
   preview.style.fontFamily="Georgia";
+
 }
 
 if(number===3){
+
   preview.style.borderTop="0";
   preview.style.borderLeft="0";
   preview.style.fontFamily="Verdana";
+
 }
 
 }
 
 function toggleDark(){
-  document.body.classList.toggle("dark");
+
+document.body.classList.toggle("dark");
+
 }
 
 function payNow(){
@@ -539,14 +676,23 @@ window.location.href=upi;
 function whatsapp(){
 
 const name=document.getElementById("name").value || "Not provided";
+
 const job=document.getElementById("job").value || "Not provided";
+
 const phone=document.getElementById("phone").value || "Not provided";
+
 const email=document.getElementById("email").value || "Not provided";
+
 const location=document.getElementById("location").value || "Not provided";
+
 const education=document.getElementById("education").value || "Not provided";
+
 const skills=document.getElementById("skills").value || "Not provided";
+
 const experience=document.getElementById("experience").value || "Not provided";
+
 const company=document.getElementById("company").value || "Not provided";
+
 const position=document.getElementById("position").value || job;
 
 const message=
@@ -565,7 +711,6 @@ const message=
 🏢 Company: ${company}
 🎯 Position: ${position}
 
-I have made the ₹99 payment.
 Please prepare my Professional CV and Job Application Kit.`;
 
 const url=
@@ -577,24 +722,25 @@ window.open(url,"_blank");
 }
 
 loadData();
+
 generateAll();
 
 </script>
+
+<!-- Service Worker: only ONE registration -->
 <script>
 if ("serviceWorker" in navigator) {
+
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js");
-  });
-}
-</script>
-  <script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
+
     navigator.serviceWorker.register("./sw.js")
       .then(() => console.log("Service Worker registered"))
       .catch(err => console.log("SW error:", err));
+
   });
+
 }
-  </script>
+</script>
+
 </body>
 </html>
