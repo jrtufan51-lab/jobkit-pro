@@ -1,8 +1,9 @@
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    // Test
+    // TEST
     if (url.pathname === "/api/test") {
       return Response.json({
         success: true,
@@ -10,7 +11,7 @@ export default {
       });
     }
 
-    // Create ₹99 Payment Link
+    // CREATE PAYMENT
     if (
       url.pathname === "/api/create-payment" &&
       request.method === "POST"
@@ -19,28 +20,40 @@ export default {
         const data = await request.json();
 
         if (!data.name || !data.email || !data.phone) {
-          return Response.json(
-            {
-              success: false,
-              message: "Name, email and phone are required."
-            },
-            { status: 400 }
-          );
+          return Response.json({
+            success: false,
+            message: "Name, email and phone are required."
+          }, { status: 400 });
         }
 
-        const referenceId =
-          "JK" + Date.now().toString();
+        if (!env.RAZORPAY_KEY_ID) {
+          return Response.json({
+            success: false,
+            message: "RAZORPAY_KEY_ID is missing."
+          }, { status: 500 });
+        }
+
+        if (!env.RAZORPAY_KEY_SECRET) {
+          return Response.json({
+            success: false,
+            message: "RAZORPAY_KEY_SECRET is missing."
+          }, { status: 500 });
+        }
+
+        const referenceId = "JK" + Date.now();
 
         const auth = btoa(
-          `${env.RAZORPAY_KEY_ID}:${env.RAZORPAY_KEY_SECRET}`
+          env.RAZORPAY_KEY_ID +
+          ":" +
+          env.RAZORPAY_KEY_SECRET
         );
 
-        const response = await fetch(
+        const razorpay = await fetch(
           "https://api.razorpay.com/v1/payment_links",
           {
             method: "POST",
             headers: {
-              Authorization: `Basic ${auth}`,
+              "Authorization": "Basic " + auth,
               "Content-Type": "application/json"
             },
             body: JSON.stringify({
@@ -66,16 +79,15 @@ export default {
           }
         );
 
-        const result = await response.json();
+        const result = await razorpay.json();
 
-        if (!response.ok) {
-          return Response.json(
-            {
-              success: false,
-              message: "Razorpay payment link creation failed."
-            },
-            { status: 500 }
-          );
+        if (!razorpay.ok) {
+          return Response.json({
+            success: false,
+            message:
+              result?.error?.description ||
+              "Razorpay payment link creation failed."
+          }, { status: 500 });
         }
 
         return Response.json({
@@ -86,17 +98,14 @@ export default {
         });
 
       } catch (error) {
-        return Response.json(
-          {
-            success: false,
-            message: "Payment setup failed."
-          },
-          { status: 500 }
-        );
+        return Response.json({
+          success: false,
+          message: "Server error: " + error.message
+        }, { status: 500 });
       }
     }
 
-    // Payment success callback
+    // PAYMENT SUCCESS
     if (
       url.pathname === "/api/payment-success" &&
       request.method === "GET"
@@ -113,14 +122,17 @@ export default {
 
       try {
         const auth = btoa(
-          `${env.RAZORPAY_KEY_ID}:${env.RAZORPAY_KEY_SECRET}`
+          env.RAZORPAY_KEY_ID +
+          ":" +
+          env.RAZORPAY_KEY_SECRET
         );
 
         const response = await fetch(
-          `https://api.razorpay.com/v1/payment_links/${paymentLinkId}`,
+          "https://api.razorpay.com/v1/payment_links/" +
+          paymentLinkId,
           {
             headers: {
-              Authorization: `Basic ${auth}`
+              "Authorization": "Basic " + auth
             }
           }
         );
@@ -130,17 +142,12 @@ export default {
         if (
           response.ok &&
           link.status === "paid" &&
-          link.amount_paid >= 9900
+          Number(link.amount_paid) >= 9900
         ) {
-          const redirectUrl =
+          return Response.redirect(
             "https://jrtufan51-lab.github.io/jobkit-pro/" +
             "?premium=unlocked&reference_id=" +
-            encodeURIComponent(
-              link.reference_id || ""
-            );
-
-          return Response.redirect(
-            redirectUrl,
+            encodeURIComponent(link.reference_id || ""),
             302
           );
         }
@@ -158,85 +165,24 @@ export default {
       }
     }
 
-    // Razorpay Webhook
+    // WEBHOOK
     if (
       url.pathname === "/api/webhook" &&
       request.method === "POST"
     ) {
-      try {
-        const body = await request.text();
-
-        const signature =
-          request.headers.get("X-Razorpay-Signature");
-
-        if (!signature) {
-          return new Response(
-            "Missing signature",
-            { status: 400 }
-          );
-        }
-
-        const secret =
-          env.RAZORPAY_WEBHOOK_SECRET;
-
-        if (!secret) {
-          return new Response(
-            "Webhook secret not configured",
-            { status: 500 }
-          );
-        }
-
-        const encoder = new TextEncoder();
-
-        const key =
-          await crypto.subtle.importKey(
-            "raw",
-            encoder.encode(secret),
-            {
-              name: "HMAC",
-              hash: "SHA-256"
-            },
-            false,
-            ["sign"]
-          );
-
-        const signed =
-          await crypto.subtle.sign(
-            "HMAC",
-            key,
-            encoder.encode(body)
-          );
-
-        const expected =
-          [...new Uint8Array(signed)]
-            .map(b =>
-              b.toString(16).padStart(2, "0")
-            )
-            .join("");
-
-        if (signature !== expected) {
-          return new Response(
-            "Invalid signature",
-            { status: 400 }
-          );
-        }
-
-        const data = JSON.parse(body);
-
-        return Response.json({
-          success: true,
-          received: true,
-          event: data.event
-        });
-
-      } catch (error) {
-        return new Response(
-          "Webhook error",
-          { status: 500 }
-        );
-      }
+      return new Response("Webhook received", {
+        status: 200
+      });
     }
 
-    return env.ASSETS.fetch(request);
+    // WEBSITE
+    if (env.ASSETS) {
+      return env.ASSETS.fetch(request);
+    }
+
+    return new Response(
+      "JobKit Pro Worker is running.",
+      { status: 200 }
+    );
   }
-};
+};                    
