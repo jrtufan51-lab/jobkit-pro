@@ -7,13 +7,11 @@
 <title>JobKit Pro - CV Builder</title>
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
-  font-family:Arial, sans-serif;
+  font-family:Arial,sans-serif;
   background:#f1f5f9;
   color:#111827;
 }
@@ -25,15 +23,8 @@ header{
   text-align:center;
 }
 
-header h1{
-  margin:0;
-  font-size:34px;
-}
-
-header p{
-  margin:8px 0;
-  color:#dbeafe;
-}
+header h1{margin:0;font-size:34px}
+header p{margin:8px 0;color:#dbeafe}
 
 .badge{
   display:inline-block;
@@ -58,8 +49,7 @@ header p{
   gap:20px;
 }
 
-.card,
-.preview{
+.card,.preview{
   background:white;
   border-radius:16px;
   padding:22px;
@@ -67,9 +57,7 @@ header p{
   margin-bottom:20px;
 }
 
-.card h2{
-  margin-top:0;
-}
+.card h2{margin-top:0}
 
 label{
   display:block;
@@ -78,15 +66,12 @@ label{
   font-weight:bold;
 }
 
-input,
-textarea,
-select{
+input,textarea{
   width:100%;
   padding:12px;
   border:1px solid #cbd5e1;
   border-radius:9px;
   font-size:15px;
-  outline:none;
 }
 
 textarea{
@@ -116,14 +101,11 @@ button{
   margin-top:10px;
 }
 
-.preview{
-  min-height:700px;
-}
+.preview{min-height:700px}
 
 .cv-name{
   font-size:30px;
   font-weight:bold;
-  color:#111827;
 }
 
 .cv-job{
@@ -179,9 +161,7 @@ button{
   margin:10px 0;
 }
 
-.premium li{
-  margin:8px 0;
-}
+.premium li{margin:8px 0}
 
 .pay{
   background:#fbbf24;
@@ -199,13 +179,25 @@ button{
 }
 
 .success{
+  display:block;
   background:#dcfce7;
   color:#166534;
 }
 
 .info{
+  display:block;
   background:#dbeafe;
   color:#1e40af;
+}
+
+.error{
+  display:block;
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+.locked{
+  opacity:.55;
 }
 
 footer{
@@ -215,22 +207,14 @@ footer{
 }
 
 @media(max-width:800px){
-  .grid{
-    grid-template-columns:1fr;
-  }
-
-  .container{
-    padding:12px;
-  }
+  .grid{grid-template-columns:1fr}
+  .container{padding:12px}
 }
 
 @media print{
-  body *{
-    visibility:hidden;
-  }
+  body *{visibility:hidden}
 
-  #cvPreview,
-  #cvPreview *{
+  #cvPreview,#cvPreview *{
     visibility:visible;
   }
 
@@ -256,8 +240,6 @@ footer{
 <div class="container">
 
 <div class="grid">
-
-<!-- FORM -->
 
 <div>
 
@@ -329,7 +311,7 @@ footer{
 <li>Download / Print CV</li>
 </ul>
 
-<button class="pay" onclick="payNow()">
+<button class="pay" id="payButton" onclick="payNow()">
 💳 Pay ₹99 & Unlock Premium
 </button>
 
@@ -338,9 +320,6 @@ footer{
 </div>
 
 </div>
-
-
-<!-- PREVIEW -->
 
 <div>
 
@@ -397,13 +376,11 @@ Your application message will appear here.
 </div>
 
 </div>
-
 </div>
 
 <footer>
 © 2026 JobKit Pro • Professional Job Application Tools
 </footer>
-
 
 <script>
 
@@ -422,7 +399,10 @@ const fields = [
 ];
 
 fields.forEach(id => {
-  document.getElementById(id).addEventListener("input", updatePreview);
+  document.getElementById(id).addEventListener(
+    "input",
+    updatePreview
+  );
 });
 
 function value(id){
@@ -453,7 +433,9 @@ function updatePreview(){
     value("education") ||
     "Your education will appear here.";
 
-  const skillsBox = document.getElementById("previewSkills");
+  const skillsBox =
+    document.getElementById("previewSkills");
+
   skillsBox.innerHTML = "";
 
   const skills = value("skills")
@@ -462,13 +444,20 @@ function updatePreview(){
     .filter(Boolean);
 
   if(skills.length === 0){
+
     skillsBox.innerHTML =
       '<span class="skill">Your Skills</span>';
+
   }else{
+
     skills.forEach(skill => {
-      const span = document.createElement("span");
+
+      const span =
+        document.createElement("span");
+
       span.className = "skill";
       span.textContent = skill;
+
       skillsBox.appendChild(span);
     });
   }
@@ -489,9 +478,15 @@ function updatePreview(){
 
 function generateCoverLetter(){
 
-  const name = value("name") || "Applicant";
-  const job = value("job") || "the position";
-  const education = value("education") || "my educational background";
+  const name =
+    value("name") || "Applicant";
+
+  const job =
+    value("job") || "the position";
+
+  const education =
+    value("education") ||
+    "my educational background";
 
   document.getElementById("coverLetter").value =
 `Dear Hiring Manager,
@@ -515,8 +510,11 @@ ${name}`;
 
 function generateMessage(){
 
-  const name = value("name") || "Applicant";
-  const job = value("job") || "the position";
+  const name =
+    value("name") || "Applicant";
+
+  const job =
+    value("job") || "the position";
 
   document.getElementById("jobMessage").value =
 `Hello,
@@ -534,39 +532,100 @@ ${name}`;
 }
 
 
-function payNow(){
+async function payNow(){
 
   const name = value("name");
   const phone = value("phone");
   const email = value("email");
 
+  const status =
+    document.getElementById("paymentStatus");
+
+  const button =
+    document.getElementById("payButton");
+
   if(!name || !phone || !email){
 
-    alert(
-      "Please fill in Full Name, Phone and Email before payment."
-    );
+    status.className = "status error";
+
+    status.textContent =
+      "Please fill Full Name, Phone and Email first.";
 
     return;
   }
 
-  const status =
-    document.getElementById("paymentStatus");
+  button.disabled = true;
 
-  status.style.display = "block";
   status.className = "status info";
+
   status.textContent =
-    "Opening secure Razorpay payment page...";
+    "Creating secure ₹99 payment...";
 
-  /*
-    EXISTING RAZORPAY PAYMENT LINK
+  try{
 
-    IMPORTANT:
-    Payment confirmation must ultimately be
-    verified by the backend webhook.
-  */
+    const response =
+      await fetch("/api/create-payment", {
 
-  window.location.href =
-    "https://rzp.io/rzp/ksnLw2N";
+        method:"POST",
+
+        headers:{
+          "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+          name:name,
+          phone:phone,
+          email:email
+        })
+
+      });
+
+    const result =
+      await response.json();
+
+    if(!response.ok || !result.success){
+
+      throw new Error(
+        result.message ||
+        "Payment link could not be created."
+      );
+    }
+
+    if(result.reference_id){
+
+      localStorage.setItem(
+        "jobkit_reference_id",
+        result.reference_id
+      );
+    }
+
+    if(result.payment_url){
+
+      status.className = "status success";
+
+      status.textContent =
+        "Secure payment page opening...";
+
+      window.location.href =
+        result.payment_url;
+
+      return;
+    }
+
+    throw new Error(
+      "Payment URL was not received."
+    );
+
+  }catch(error){
+
+    status.className = "status error";
+
+    status.textContent =
+      error.message ||
+      "Payment setup failed.";
+
+    button.disabled = false;
+  }
 }
 
 
@@ -575,8 +634,8 @@ function printCV(){
   const status =
     document.getElementById("paymentStatus");
 
-  status.style.display = "block";
   status.className = "status success";
+
   status.textContent =
     "CV print/download window opened.";
 
@@ -588,14 +647,11 @@ updatePreview();
 
 </script>
 
-
-<!-- Service Worker -->
-
 <script>
 
 if("serviceWorker" in navigator){
 
-  window.addEventListener("load", () => {
+  window.addEventListener("load",() => {
 
     navigator.serviceWorker
       .register("./sw.js")
@@ -603,7 +659,7 @@ if("serviceWorker" in navigator){
         console.log("Service Worker registered");
       })
       .catch(err => {
-        console.log("SW error:", err);
+        console.log("SW error:",err);
       });
 
   });
@@ -614,3 +670,4 @@ if("serviceWorker" in navigator){
 
 </body>
 </html>
+      
