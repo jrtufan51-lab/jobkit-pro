@@ -1,455 +1,650 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>JobKit Pro - CV Builder</title>
+<title>JobKit Pro</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f7fb;
-      color: #222;
-    }
+*{
+  box-sizing:border-box;
+}
 
-    header {
-      background: #111827;
-      color: white;
-      padding: 22px 15px;
-      text-align: center;
-    }
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f4f7fb;
+  color:#222;
+}
 
-    header h1 {
-      margin: 0;
-      font-size: 30px;
-    }
+header{
+  background:#111827;
+  color:white;
+  padding:22px 15px;
+  text-align:center;
+}
 
-    header p {
-      margin: 8px 0 0;
-      color: #d1d5db;
-    }
+header h1{
+  margin:0;
+  font-size:30px;
+}
 
-    .container {
-      width: 92%;
-      max-width: 850px;
-      margin: 25px auto;
-    }
+header p{
+  margin:8px 0 0;
+  color:#d1d5db;
+}
 
-    .card {
-      background: white;
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 14px;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
-    }
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
+}
 
-    h2 {
-      margin-top: 0;
-      color: #111827;
-    }
+.card{
+  background:white;
+  padding:20px;
+  margin-bottom:20px;
+  border-radius:15px;
+  box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
 
-    label {
-      display: block;
-      margin-top: 14px;
-      margin-bottom: 6px;
-      font-weight: bold;
-    }
+.card h2{
+  margin-top:0;
+  color:#111827;
+}
 
-    input,
-    textarea {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #d1d5db;
-      border-radius: 8px;
-      font-size: 15px;
-    }
+label{
+  display:block;
+  margin-top:15px;
+  font-weight:bold;
+}
 
-    textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
+input,
+textarea,
+select{
+  width:100%;
+  padding:12px;
+  margin-top:7px;
+  border:1px solid #d1d5db;
+  border-radius:8px;
+  font-size:15px;
+}
 
-    button {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 9px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 12px;
-    }
+textarea{
+  min-height:110px;
+  resize:vertical;
+}
 
-    .primary {
-      background: #2563eb;
-      color: white;
-    }
+button{
+  border:0;
+  border-radius:8px;
+  padding:12px 18px;
+  margin-top:15px;
+  cursor:pointer;
+  font-size:15px;
+  font-weight:bold;
+}
 
-    .secondary {
-      background: #111827;
-      color: white;
-    }
+.generate{
+  background:#2563eb;
+  color:white;
+}
 
-    .premium {
-      background: #fff7ed;
-      border: 2px solid #f59e0b;
-    }
+.pay{
+  width:100%;
+  background:#16a34a;
+  color:white;
+  font-size:17px;
+}
 
-    .premium button {
-      background: #f59e0b;
-      color: white;
-    }
+.reset{
+  background:#dc2626;
+  color:white;
+}
 
-    #message {
-      margin-top: 12px;
-      font-weight: bold;
-      text-align: center;
-    }
+.status{
+  margin-top:15px;
+  padding:12px;
+  border-radius:8px;
+  display:none;
+}
 
-    #preview {
-      background: white;
-      border: 1px solid #ddd;
-      padding: 25px;
-      min-height: 300px;
-    }
+.success{
+  display:block;
+  background:#dcfce7;
+  color:#166534;
+}
 
-    .cv-name {
-      font-size: 28px;
-      font-weight: bold;
-    }
+.premium{
+  border:2px solid #f59e0b;
+  background:#fffbeb;
+}
 
-    .cv-title {
-      color: #2563eb;
-      margin-top: 5px;
-    }
+.price{
+  font-size:35px;
+  font-weight:bold;
+  text-align:center;
+  color:#d97706;
+  margin:10px;
+}
 
-    .section {
-      margin-top: 20px;
-    }
+.qr{
+  display:block;
+  width:260px;
+  max-width:100%;
+  margin:20px auto;
+  background:white;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid #ddd;
+}
 
-    .section h3 {
-      border-bottom: 2px solid #ddd;
-      padding-bottom: 5px;
-    }
+.upi{
+  text-align:center;
+  font-size:15px;
+}
 
-    .success {
-      color: green;
-    }
+.preview{
+  background:white;
+  padding:25px;
+  border:1px solid #ddd;
+  border-radius:10px;
+}
 
-    .error {
-      color: red;
-    }
+.preview h1{
+  margin-bottom:5px;
+}
 
-    footer {
-      text-align: center;
-      padding: 25px;
-      color: #666;
-    }
-  </style>
+.preview .job{
+  color:#2563eb;
+  font-weight:bold;
+}
+
+.preview hr{
+  border:0;
+  border-top:1px solid #ddd;
+  margin:20px 0;
+}
+
+.preview h3{
+  color:#111827;
+  border-bottom:1px solid #ddd;
+  padding-bottom:5px;
+}
+
+.print-btn{
+  background:#111827;
+  color:white;
+  width:100%;
+}
+
+.hidden{
+  display:none;
+}
+
+footer{
+  text-align:center;
+  padding:25px;
+  color:#6b7280;
+}
+
+@media print{
+
+  body{
+    background:white;
+  }
+
+  header,
+  .no-print,
+  footer{
+    display:none !important;
+  }
+
+  .container{
+    padding:0;
+  }
+
+  .preview{
+    border:0;
+    box-shadow:none;
+  }
+
+}
+
+</style>
 </head>
 
 <body>
 
 <header>
-  <h1>JobKit Pro</h1>
-  <p>Create your professional CV easily</p>
+  <h1>💼 JobKit Pro</h1>
+  <p>Professional CV & Job Application Tools</p>
 </header>
+
 
 <div class="container">
 
-  <div class="card">
-    <h2>Personal Details</h2>
+<!-- PERSONAL DETAILS -->
 
-    <label>Full Name</label>
-    <input id="name" placeholder="Enter your full name">
+<div class="card">
 
-    <label>Job Title</label>
-    <input id="jobTitle" placeholder="Example: Accountant">
+<h2>👤 Personal Details</h2>
 
-    <label>Phone</label>
-    <input id="phone" placeholder="Enter your phone number">
+<label>Full Name</label>
+<input id="name" type="text" placeholder="Enter your full name">
 
-    <label>Email</label>
-    <input id="email" type="email" placeholder="Enter your email">
+<label>Job Title</label>
+<input id="job" type="text" placeholder="Example: Accountant">
 
-    <label>Location</label>
-    <input id="location" placeholder="Example: Rajahmundry, Andhra Pradesh">
+<label>Phone</label>
+<input id="phone" type="tel" placeholder="Enter phone number">
 
-    <label>Career Objective</label>
-    <textarea id="objective" placeholder="Write your career objective"></textarea>
-  </div>
+<label>Email</label>
+<input id="email" type="email" placeholder="Enter email">
 
+<label>Location</label>
+<input id="location" type="text" placeholder="City, State">
 
-  <div class="card">
-    <h2>Education & Skills</h2>
-
-    <label>Education</label>
-    <input id="education" placeholder="Example: B.Com">
-
-    <label>Skills</label>
-    <textarea id="skills" placeholder="Example: MS Excel, Tally, Communication, Computer"></textarea>
-
-    <label>Experience</label>
-    <textarea id="experience" placeholder="Example: Fresher"></textarea>
-
-    <button class="primary" onclick="generateCV()">
-      Generate CV
-    </button>
-  </div>
-
-
-  <div class="card">
-    <h2>CV Preview</h2>
-
-    <div id="preview">
-      Your CV preview will appear here.
-    </div>
-
-    <button class="secondary" onclick="window.print()">
-      Print / Save CV
-    </button>
-  </div>
-
-
-  <div class="card">
-    <h2>Cover Letter</h2>
-
-    <button class="primary" onclick="generateCoverLetter()">
-      Generate Cover Letter
-    </button>
-
-    <textarea id="coverLetter" style="margin-top:15px;" readonly></textarea>
-  </div>
-
-
-  <div class="card">
-    <h2>Job Application Message</h2>
-
-    <button class="primary" onclick="generateMessage()">
-      Generate Message
-    </button>
-
-    <textarea id="jobMessage" style="margin-top:15px;" readonly></textarea>
-  </div>
-
-
-  <div class="card premium">
-    <h2>⭐ JobKit Pro Premium</h2>
-
-    <p>
-      Unlock premium career features for only
-      <strong>₹99</strong>.
-    </p>
-
-    <ul>
-      <li>Premium CV tools</li>
-      <li>Professional cover letter</li>
-      <li>Job application message</li>
-      <li>Easy CV download</li>
-    </ul>
-
-    <button onclick="payNow()">
-      Pay ₹99 & Unlock Premium
-    </button>
-
-    <div id="message"></div>
-  </div>
+<label>Career Objective</label>
+<textarea id="objective"
+placeholder="Write your career objective"></textarea>
 
 </div>
 
+
+<!-- EDUCATION & SKILLS -->
+
+<div class="card">
+
+<h2>🎓 Education & Skills</h2>
+
+<label>Education</label>
+<textarea id="education"
+placeholder="Example: B.Com - Adikavi Nannaya University"></textarea>
+
+<label>Skills</label>
+<textarea id="skills"
+placeholder="Example: MS Office, Communication, Excel"></textarea>
+
+<label>Experience</label>
+<textarea id="experience"
+placeholder="Enter your work experience or write Fresher"></textarea>
+
+</div>
+
+
+<!-- COVER LETTER -->
+
+<div class="card">
+
+<h2>✉️ Cover Letter</h2>
+
+<textarea id="coverLetter"
+placeholder="Your cover letter will appear here"></textarea>
+
+<button class="generate" onclick="generateCoverLetter()">
+Generate Cover Letter
+</button>
+
+</div>
+
+
+<!-- JOB MESSAGE -->
+
+<div class="card">
+
+<h2>📩 Job Application Message</h2>
+
+<textarea id="jobMessage"
+placeholder="Your job application message will appear here"></textarea>
+
+<button class="generate" onclick="generateJobMessage()">
+Generate Message
+</button>
+
+</div>
+
+
+<!-- PREMIUM -->
+
+<div class="card premium no-print">
+
+<h2>⭐ JobKit Pro Premium</h2>
+
+<div class="price">₹99</div>
+
+<ul>
+<li>Professional CV</li>
+<li>Cover Letter</li>
+<li>Job Application Message</li>
+<li>Download / Print CV</li>
+</ul>
+
+<img
+  src="./jobkit-pro-upi-qr.png"
+  alt="JobKit Pro UPI QR"
+  class="qr"
+>
+
+<p class="upi">
+📲 <b>Scan & Pay ₹99</b>
+</p>
+
+<p class="upi">
+UPI ID:
+<b>8798834068@ptyes</b>
+</p>
+
+<p class="upi">
+After payment, click the button below.
+</p>
+
+<button class="pay" onclick="paymentDone()">
+✅ I Have Paid ₹99
+</button>
+
+<div id="paymentStatus" class="status"></div>
+
+</div>
+
+
+<!-- CV PREVIEW -->
+
+<div class="card">
+
+<h2 class="no-print">📄 CV Preview</h2>
+
+<div class="preview" id="cvPreview">
+
+<h1 id="previewName">Your Name</h1>
+
+<div class="job" id="previewJob">
+Job Title
+</div>
+
+<p id="previewContact">
+Phone | Email | Location
+</p>
+
+<hr>
+
+<h3>Profile</h3>
+<p id="previewObjective">
+Your career objective will appear here.
+</p>
+
+<h3>Education</h3>
+<p id="previewEducation">
+Your education will appear here.
+</p>
+
+<h3>Skills</h3>
+<p id="previewSkills">
+Your skills will appear here.
+</p>
+
+<h3>Experience</h3>
+<p id="previewExperience">
+Your experience will appear here.
+</p>
+
+<h3>Cover Letter</h3>
+<p id="previewCoverLetter">
+Your cover letter will appear here.
+</p>
+
+<h3>Job Application Message</h3>
+<p id="previewJobMessage">
+Your job application message will appear here.
+</p>
+
+</div>
+
+<button
+  class="print-btn no-print"
+  onclick="printCV()">
+🖨️ Print / Save CV
+</button>
+
+</div>
+
+
+<button
+  class="reset no-print"
+  onclick="resetApp()">
+Reset
+</button>
+
+</div>
+
+
 <footer>
-  © 2026 JobKit Pro
+© 2026 JobKit Pro
 </footer>
 
 
 <script>
 
-function generateCV() {
+/* GET VALUE */
 
-  const name = document.getElementById("name").value;
-  const jobTitle = document.getElementById("jobTitle").value;
-  const phone = document.getElementById("phone").value;
-  const email = document.getElementById("email").value;
-  const location = document.getElementById("location").value;
-  const objective = document.getElementById("objective").value;
-  const education = document.getElementById("education").value;
-  const skills = document.getElementById("skills").value;
-  const experience = document.getElementById("experience").value;
+function value(id){
 
-  document.getElementById("preview").innerHTML = `
+  return document.getElementById(id).value.trim();
 
-    <div class="cv-name">${name || "Your Name"}</div>
-
-    <div class="cv-title">
-      ${jobTitle || "Job Title"}
-    </div>
-
-    <p>
-      ${phone || ""} |
-      ${email || ""} |
-      ${location || ""}
-    </p>
-
-    <div class="section">
-      <h3>Career Objective</h3>
-      <p>${objective || "Career objective"}</p>
-    </div>
-
-    <div class="section">
-      <h3>Education</h3>
-      <p>${education || "Education details"}</p>
-    </div>
-
-    <div class="section">
-      <h3>Skills</h3>
-      <p>${skills || "Skills"}</p>
-    </div>
-
-    <div class="section">
-      <h3>Experience</h3>
-      <p>${experience || "Experience"}</p>
-    </div>
-
-  `;
 }
 
 
-function generateCoverLetter() {
+/* LIVE CV UPDATE */
+
+function updateCV(){
 
   const name =
-    document.getElementById("name").value || "Applicant";
+    value("name") || "Your Name";
 
-  const jobTitle =
-    document.getElementById("jobTitle").value || "the position";
+  const job =
+    value("job") || "Job Title";
+
+  const phone =
+    value("phone") || "Phone";
+
+  const email =
+    value("email") || "Email";
+
+  const location =
+    value("location") || "Location";
+
+  document.getElementById("previewName").textContent =
+    name;
+
+  document.getElementById("previewJob").textContent =
+    job;
+
+  document.getElementById("previewContact").textContent =
+    phone + " | " + email + " | " + location;
+
+  document.getElementById("previewObjective").textContent =
+    value("objective") || "Your career objective will appear here.";
+
+  document.getElementById("previewEducation").textContent =
+    value("education") || "Your education will appear here.";
+
+  document.getElementById("previewSkills").textContent =
+    value("skills") || "Your skills will appear here.";
+
+  document.getElementById("previewExperience").textContent =
+    value("experience") || "Your experience will appear here.";
+
+  document.getElementById("previewCoverLetter").textContent =
+    value("coverLetter") || "Your cover letter will appear here.";
+
+  document.getElementById("previewJobMessage").textContent =
+    value("jobMessage") || "Your job application message will appear here.";
+
+}
+
+
+/* UPDATE WHILE TYPING */
+
+document.querySelectorAll(
+  "input, textarea"
+).forEach(function(element){
+
+  element.addEventListener(
+    "input",
+    updateCV
+  );
+
+});
+
+
+/* COVER LETTER */
+
+function generateCoverLetter(){
+
+  const name =
+    value("name") || "Applicant";
+
+  const job =
+    value("job") || "the position";
 
   const education =
-    document.getElementById("education").value || "my education";
+    value("education") || "my educational background";
 
-  document.getElementById("coverLetter").value =
+  const skills =
+    value("skills") || "my skills";
 
+  const letter =
 `Dear Hiring Manager,
 
-I am ${name}, and I am interested in applying for ${jobTitle}.
+I am writing to apply for the ${job} position.
 
-I have completed ${education} and I am eager to use my skills and knowledge in a professional environment.
+My name is ${name}. I have completed ${education} and have developed skills in ${skills}.
 
-I am a hardworking and responsible person who is willing to learn and grow with the organization.
+I am a hardworking and motivated person who is willing to learn and grow with your organization.
 
-Thank you for considering my application.
+I would be grateful for the opportunity to discuss my application with you.
+
+Thank you for your time and consideration.
 
 Sincerely,
 ${name}`;
+
+  document.getElementById(
+    "coverLetter"
+  ).value = letter;
+
+  updateCV();
+
 }
 
 
-function generateMessage() {
+/* JOB APPLICATION MESSAGE */
+
+function generateJobMessage(){
 
   const name =
-    document.getElementById("name").value || "Applicant";
+    value("name") || "Applicant";
 
-  const jobTitle =
-    document.getElementById("jobTitle").value || "a job";
+  const job =
+    value("job") || "a suitable position";
 
-  document.getElementById("jobMessage").value =
+  const phone =
+    value("phone") || "";
 
-`Hello,
+  const message =
+`Hello Sir/Madam,
 
-My name is ${name}. I am interested in applying for ${jobTitle}.
+My name is ${name}. I am interested in applying for ${job}.
 
 I am looking for an opportunity to start/grow my career. Please let me know if there is any suitable vacancy available.
 
 Thank you.
-${name}`;
+
+Regards,
+${name}
+${phone}`;
+
+  document.getElementById(
+    "jobMessage"
+  ).value = message;
+
+  updateCV();
+
 }
 
 
-async function payNow() {
+/* MANUAL UPI PAYMENT */
 
-  const name =
-    document.getElementById("name").value.trim();
+function paymentDone(){
 
-  const email =
-    document.getElementById("email").value.trim();
-
-  const phone =
-    document.getElementById("phone").value.trim();
-
-  const message =
-    document.getElementById("message");
-
-  if (!name || !email || !phone) {
-
-    message.className = "error";
-
-    message.innerText =
-      "Please enter your name, email and phone number first.";
-
-    return;
-  }
-
-  message.className = "";
-
-  message.innerText =
-    "Creating secure payment link...";
-
-  try {
-
-    const response = await fetch(
-      "https://jobkit-pro.jrtufan51.workers.dev/api/create-payment",
-      {
-        method: "POST",
-
-        headers: {
-          "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-          name: name,
-          email: email,
-          phone: phone
-        })
-      }
+  const status =
+    document.getElementById(
+      "paymentStatus"
     );
 
-    const result = await response.json();
+  localStorage.setItem(
+    "jobkit_premium",
+    "true"
+  );
 
-    if (result.success && result.payment_url) {
+  status.className =
+    "status success";
 
-      message.className = "success";
+  status.textContent =
+    "✅ Payment marked as completed. Premium features are now available.";
 
-      message.innerText =
-        "Opening Razorpay...";
-
-      window.location.href =
-        result.payment_url;
-
-    } else {
-
-      message.className = "error";
-
-      message.innerText =
-        result.message ||
-        "Payment link could not be created.";
-
-    }
-
-  } catch (error) {
-
-    message.className = "error";
-
-    message.innerText =
-      "Payment server error. Please try again.";
-
-    console.error(error);
-  }
 }
 
+
+/* PRINT */
+
+function printCV(){
+
+  updateCV();
+
+  window.print();
+
+}
+
+
+/* RESET */
+
+function resetApp(){
+
+  if(
+    confirm(
+      "Are you sure you want to reset all details?"
+    )
+  ){
+
+    localStorage.removeItem(
+      "jobkit_premium"
+    );
+
+    document.querySelectorAll(
+      "input, textarea"
+    ).forEach(function(element){
+
+      element.value = "";
+
+    });
+
+    document.getElementById(
+      "paymentStatus"
+    ).style.display = "none";
+
+    updateCV();
+
+  }
+
+}
+
+
+/* START */
+
+updateCV();
 
 </script>
 
